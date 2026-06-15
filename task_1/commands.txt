@@ -1,0 +1,6 @@
+Ссылка на образ:
+https://hub.docker.com/r/ghassan941alshebli/fedora-qt-server
+
+Команды (Commands):
+1. docker build -t fedora-qt-server .
+2. docker run --rm -p 65432:65432 fedora-qt-server
