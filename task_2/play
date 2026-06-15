@@ -1,0 +1,16 @@
+$tcp = New-Object System.Net.Sockets.TcpClient("127.0.0.1", 65432)
+$stream = $tcp.GetStream()
+$utf8 = [System.Text.Encoding]::UTF8
+$reader = New-Object System.IO.StreamReader($stream, $utf8)
+$writer = New-Object System.IO.StreamWriter($stream, $utf8)
+$writer.AutoFlush = $true
+
+Start-Sleep -Milliseconds 500
+while ($stream.DataAvailable) { Write-Host $reader.ReadLine() -ForegroundColor Cyan }
+
+while ($true) {
+    $guess = Read-Host "Guess"
+    $writer.WriteLine($guess)
+    Start-Sleep -Milliseconds 500
+    while ($stream.DataAvailable) { Write-Host $reader.ReadLine() -ForegroundColor Yellow }
+}
